@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report Incident - SecureTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Report Cyber Security Incident</h2>
+
+    <select id="type">
+        <option value="">Select Incident Type</option>
+        <option value="phishing">Phishing Attack</option>
+        <option value="malware">Malware Infection</option>
+        <option value="unauthorized">Unauthorized Access</option>
+        <option value="data_breach">Data Breach</option>
+        <option value="suspicious">Suspicious Activity</option>
+    </select>
+    <br><br>
+
+    <textarea id="description" placeholder="Describe the incident..." rows="6" cols="40"></textarea>
+    <br><br>
+
+    <button onclick="submitIncident()">Submit Report</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
