@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registered Users | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🛡</div>
+        <div>
+          <h2>SecureTrack</h2>
+          <span>Security Operations</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">MAIN</div>
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="incidents.html" class="nav-item">
+          <span class="nav-icon">◉</span>
+          <span>Incidents</span>
+        </a>
+        <a href="report.html" class="nav-item">
+          <span class="nav-icon">＋</span>
+          <span>Report an Incident</span>
+        </a>
+
+        <div class="nav-section-title admin-only">ADMINISTRATION</div>
+        <a href="dashboard.html#analytics" class="nav-item admin-only">
+          <span class="nav-icon">◈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="users.html" class="nav-item admin-only active" aria-current="page">
+          <span class="nav-icon">♙</span>
+          <span>Users</span>
+        </a>
+
+        <div class="nav-section-title">INFORMATION</div>
+        <a href="dashboard.html#about" class="nav-item">
+          <span class="nav-icon">ⓘ</span>
+          <span>About SecureTrack</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="security-status">
+          <div class="status-pulse"></div>
+          <div>
+            <strong>Incident Tracking</strong>
+            <span>Incident tracking workspace</span>
+          </div>
+        </div>
+        <button class="logout-btn" type="button" onclick="logout()">
+          <span>⇥</span>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">
+          <span>SecureTrack</span>
+          <span>/</span>
+          <strong>Registered Users</strong>
+        </div>
+        <div class="topbar-actions">
+          <button class="user-menu" id="userMenuButton" type="button">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <div class="user-info">
+              <strong id="topUserName">User</strong>
+              <span id="topUserRole">Security Administrator</span>
+            </div>
+            <span class="dropdown-arrow">▾</span>
+          </button>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="dropdown-user">
+              <div class="user-avatar large" id="dropdownAvatar">U</div>
+              <div>
+                <strong id="dropdownName">User</strong>
+                <span id="dropdownEmail">user@email.com</span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-logout" type="button" onclick="logout()">⇥ Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-content users-page">
+        <section class="users-section">
+          <div class="page-hero users-page-hero">
+            <div class="page-hero-copy">
+              <span class="page-hero-kicker"><span></span> ADMINISTRATION</span>
+              <h1>Registered users</h1>
+              <p>View the accounts in your SecureTrack workspace and their access roles.</p>
+            </div>
+            <a class="secondary-btn page-hero-action" href="dashboard.html"><span aria-hidden="true">←</span> Dashboard</a>
+          </div>
+
+          <div class="users-summary-grid" aria-label="User account summary">
+            <div class="user-summary-card">
+              <span class="user-summary-icon users-total-icon">♙</span>
+              <div><span class="user-summary-label">Workspace accounts</span><strong id="usersTotalCount">—</strong></div>
+            </div>
+            <div class="user-summary-card">
+              <span class="user-summary-icon users-admin-icon">✦</span>
+              <div><span class="user-summary-label">Administrators</span><strong id="usersAdminCount">—</strong></div>
+            </div>
+            <div class="user-summary-card">
+              <span class="user-summary-icon users-member-icon">✓</span>
+              <div><span class="user-summary-label">Standard users</span><strong id="usersMemberCount">—</strong></div>
+            </div>
+          </div>
+
+          <div class="records-panel users-records-panel">
+            <div class="records-panel-header">
+              <div>
+                <span class="panel-kicker">ACCOUNT DIRECTORY</span>
+                <h2>Workspace users</h2>
+                <p>Account details are shown without password information.</p>
+              </div>
+              <span class="directory-count" id="usersDirectoryCount" aria-live="polite">Loading accounts…</span>
+            </div>
+            <div class="table-container">
+              <table class="incidents-table users-table" aria-label="Registered user accounts">
+                <thead>
+                  <tr>
+                    <th scope="col">ACCOUNT</th>
+                    <th scope="col">ACCESS ROLE</th>
+                    <th scope="col">JOINED</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                  <tr>
+                    <td colspan="3" class="loading-cell">
+                      <div class="loading-spinner"></div>
+                      Loading registered users...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

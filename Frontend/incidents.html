@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incidents | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🛡</div>
+        <div>
+          <h2>SecureTrack</h2>
+          <span>Security Operations</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">MAIN</div>
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="incidents.html" class="nav-item active" aria-current="page">
+          <span class="nav-icon">◉</span>
+          <span>Incidents</span>
+        </a>
+        <a href="report.html" class="nav-item">
+          <span class="nav-icon">＋</span>
+          <span>Report an Incident</span>
+        </a>
+
+        <div class="nav-section-title admin-only">ADMINISTRATION</div>
+        <a href="dashboard.html#analytics" class="nav-item admin-only">
+          <span class="nav-icon">◈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="users.html" class="nav-item admin-only">
+          <span class="nav-icon">♙</span>
+          <span>Users</span>
+        </a>
+
+        <div class="nav-section-title">INFORMATION</div>
+        <a href="dashboard.html#about" class="nav-item">
+          <span class="nav-icon">ⓘ</span>
+          <span>About SecureTrack</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="security-status">
+          <div class="status-pulse"></div>
+          <div>
+            <strong>Incident Tracking</strong>
+            <span>Incident tracking workspace</span>
+          </div>
+        </div>
+        <button class="logout-btn" type="button" onclick="logout()">
+          <span>⇥</span>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">
+          <span>SecureTrack</span>
+          <span>/</span>
+          <strong>Incidents</strong>
+        </div>
+        <div class="topbar-actions">
+          <button class="user-menu" id="userMenuButton" type="button">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <div class="user-info">
+              <strong id="topUserName">User</strong>
+              <span id="topUserRole">Security User</span>
+            </div>
+            <span class="dropdown-arrow">▾</span>
+          </button>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="dropdown-user">
+              <div class="user-avatar large" id="dropdownAvatar">U</div>
+              <div>
+                <strong id="dropdownName">User</strong>
+                <span id="dropdownEmail">user@email.com</span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-logout" type="button" onclick="logout()">⇥ Logout</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-content incidents-page">
+        <section class="incidents-section" id="incidents">
+          <div class="page-hero incidents-page-hero">
+            <div class="page-hero-copy">
+              <span class="page-hero-kicker"><span></span> INCIDENT RESPONSE</span>
+              <h1>Incidents</h1>
+              <p>Review reported events, track investigation progress, and update incident status.</p>
+            </div>
+            <a class="primary-btn page-hero-action" href="report.html"><span aria-hidden="true">＋</span> Report an Incident</a>
+          </div>
+
+          <div class="records-panel">
+            <div class="records-panel-header">
+              <div>
+                <span class="panel-kicker">INCIDENT REGISTER</span>
+                <h2>All incidents</h2>
+                <p>Search and filter the reports available to your account.</p>
+              </div>
+              <div class="results-count" id="resultsCount" aria-live="polite">Loading incidents…</div>
+            </div>
+
+            <div class="filter-toolbar">
+              <div class="search-box">
+                <span>⌕</span>
+                <input type="search" id="searchIncident" placeholder="Search by keyword or incident ID" aria-label="Search incidents" />
+              </div>
+              <select id="filterSeverity" class="filter-select" aria-label="Filter by severity">
+                <option value="">All severity levels</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+              </select>
+              <select id="filterStatus" class="filter-select" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Investigating">Investigating</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+              <button class="clear-filter-btn" id="clearFiltersButton" type="button">Clear filters</button>
+            </div>
+
+            <div class="table-container">
+              <table class="incidents-table" aria-label="Reported security incidents">
+                <thead>
+                  <tr>
+                    <th scope="col">INCIDENT</th>
+                    <th scope="col">TYPE</th>
+                    <th scope="col">SEVERITY</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">REPORTED</th>
+                    <th scope="col">ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="incidentTableBody">
+                  <tr><td colspan="6" class="loading-cell"><div class="loading-spinner"></div>Loading incidents...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="empty-state hidden records-empty-state" id="emptyState" aria-live="polite">
+            <div class="empty-icon">◉</div>
+            <h3 id="emptyStateTitle">No incidents yet</h3>
+            <p id="emptyStateMessage">No security incidents have been reported. Submit a report to start tracking activity.</p>
+            <a class="primary-btn" id="emptyStateReportLink" href="report.html">＋ Report an Incident</a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="incidentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <span class="panel-kicker">INCIDENT DETAILS</span>
+          <h2 id="modalIncidentId">Incident</h2>
+        </div>
+        <button class="modal-close" type="button" id="closeModalButton">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta-grid">
+          <div class="meta-box">
+            <span>TYPE</span>
+            <strong id="modalType">-</strong>
+            <select id="modalTypeInput" hidden>
+              <option value="phishing">Phishing Attack</option>
+              <option value="malware">Malware Infection</option>
+              <option value="unauthorized">Unauthorized Access</option>
+              <option value="data_breach">Data Breach</option>
+              <option value="suspicious">Suspicious Activity</option>
+            </select>
+          </div>
+          <div class="meta-box">
+            <span>SEVERITY</span>
+            <strong id="modalSeverity">-</strong>
+            <select id="modalSeverityInput" hidden>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <div class="meta-box">
+            <span>STATUS</span>
+            <strong id="modalStatus">-</strong>
+            <select id="modalStatusInput" hidden>
+              <option value="Pending">Pending</option>
+              <option value="Investigating">Investigating</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="meta-box"><span>REPORTED</span><strong id="modalDate">-</strong></div>
+        </div>
+
+        <div class="modal-section">
+          <label>Description</label>
+          <div class="description-box" id="modalDescription">-</div>
+          <textarea id="modalDescriptionInput" maxlength="5000" rows="5" hidden></textarea>
+        </div>
+
+        <div class="modal-section">
+          <label>Investigation Notes</label>
+          <textarea id="modalNotes" maxlength="5000" placeholder="Add investigation notes..." rows="5" readonly></textarea>
+        </div>
+
+        <div class="modal-actions" id="adminModalActions">
+          <button class="secondary-btn" id="modalChangeStatusButton" type="button" hidden>Change Status</button>
+          <button class="secondary-btn" id="modalEditButton" type="button" hidden>Edit Incident</button>
+          <button class="danger-btn" id="modalDeleteButton" type="button">Delete</button>
+          <button class="secondary-btn" id="modalCancelStatusButton" type="button" hidden>Cancel</button>
+          <div class="modal-action-right">
+            <button class="secondary-btn" id="modalCloseSecondary" type="button">Cancel</button>
+            <button class="secondary-btn" id="modalCancelEditButton" type="button" hidden>Cancel Edit</button>
+            <button class="primary-btn" id="modalSaveStatusButton" type="button" hidden>Save Status</button>
+            <button class="primary-btn" id="modalSaveButton" type="button" hidden>Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an Account | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="brand-icon">🛡</div>
+        <div>
+          <h1>SecureTrack</h1>
+          <span>Security incident reporting and tracking</span>
+        </div>
+      </div>
+
+      <div class="auth-header">
+        <p class="eyebrow">New account</p>
+        <h2>Create your account</h2>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <div class="field-group">
+          <label for="name">Full name</label>
+          <input id="name" type="text" maxlength="100" autocomplete="name" placeholder="Enter your full name" required />
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email address</label>
+          <input id="email" type="email" maxlength="254" autocomplete="email" placeholder="name@company.com" required />
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input id="password" type="password" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters" required />
+            <button type="button" class="toggle-password" data-toggle-password="register" data-target-id="password">Show</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="confirmPassword">Confirm password</label>
+          <div class="password-field">
+            <input id="confirmPassword" type="password" maxlength="128" autocomplete="new-password" placeholder="Repeat your password" required />
+            <button type="button" class="toggle-password" data-toggle-password="confirm" data-target-id="confirmPassword">Show</button>
+          </div>
+        </div>
+
+        <button id="registerButton" class="primary-btn auth-submit" type="submit" data-auth-submit="register">Create account</button>
+      </form>
+
+      <p class="auth-switch">
+        Already have an account?
+        <a href="login.html">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

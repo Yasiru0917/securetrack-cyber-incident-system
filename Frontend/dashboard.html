@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | SecureTrack</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛡
+            </div>
+
+            <div>
+                <h2>SecureTrack</h2>
+                <span>Security Operations</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-title">
+                MAIN
+            </div>
+
+            <a
+                href="dashboard.html"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">▦</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="incidents.html"
+                class="nav-item"
+                id="incidentsNav"
+            >
+
+                <span class="nav-icon">◉</span>
+
+                <span>Incidents</span>
+
+            </a>
+
+
+            <a
+                href="report.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">＋</span>
+
+                <span>Report an Incident</span>
+
+            </a>
+
+
+            <div
+                class="nav-section-title admin-only"
+                id="adminSection"
+            >
+                ADMINISTRATION
+            </div>
+
+
+            <a
+                href="dashboard.html#analytics"
+                class="nav-item admin-only"
+                id="analyticsNav"
+            >
+
+                <span class="nav-icon">◈</span>
+
+                <span>Analytics</span>
+
+            </a>
+
+
+            <a
+                href="users.html"
+                class="nav-item admin-only"
+                id="usersNav"
+            >
+
+                <span class="nav-icon">♙</span>
+
+                <span>Users</span>
+
+            </a>
+
+
+            <div class="nav-section-title">
+                INFORMATION
+            </div>
+
+
+            <a
+                href="#about"
+                class="nav-item"
+                id="aboutNav"
+            >
+
+                <span class="nav-icon">ⓘ</span>
+
+                <span>About SecureTrack</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <div class="security-status">
+
+                <div class="status-pulse"></div>
+
+                <div>
+
+                    <strong>Incident Tracking</strong>
+
+                    <span>Incident tracking workspace</span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+
+                <span>⇥</span>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
+            >
+                ☰
+            </button>
+
+
+            <div class="breadcrumb">
+
+                <span>SecureTrack</span>
+
+                <span>/</span>
+
+                <strong>Dashboard</strong>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <!-- User -->
+
+                <button
+                    class="user-menu"
+                    id="userMenuButton"
+                    type="button"
+                >
+
+                    <div
+                        class="user-avatar"
+                        id="userAvatar"
+                    >
+                        Y
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong id="topUserName">
+                            User
+                        </strong>
+
+                        <span id="topUserRole">
+                            Security User
+                        </span>
+
+                    </div>
+
+                    <span class="dropdown-arrow">
+                        ▾
+                    </span>
+
+                </button>
+
+
+                <div
+                    class="user-dropdown"
+                    id="userDropdown"
+                >
+
+                    <div class="dropdown-user">
+
+                        <div
+                            class="user-avatar large"
+                            id="dropdownAvatar"
+                        >
+                            Y
+                        </div>
+
+                        <div>
+
+                            <strong id="dropdownName">
+                                User
+                            </strong>
+
+                            <span id="dropdownEmail">
+                                user@email.com
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <button
+                        type="button"
+                        class="dropdown-logout"
+                        onclick="logout()"
+                    >
+                        ⇥ Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+
+        <section class="page-content">
+
+
+            <!-- HERO -->
+
+            <div class="dashboard-hero">
+
+                <div>
+
+                    <div class="eyebrow">
+                        SECURITY OPERATIONS
+                    </div>
+
+                    <h1>
+                        Welcome back,
+                        <span id="welcomeName">
+                            User
+                        </span>
+                        👋
+                    </h1>
+
+                    <p>
+                        Track security incidents, follow investigation progress, and report new concerns.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="goToReport()"
+                >
+
+                    <span>＋</span>
+
+                    Report an Incident
+
+                </button>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats-grid">
+
+
+                <div
+                    class="stat-card total-card"
+                    data-stat="total"
+                >
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon blue">
+                            ◉
+                        </div>
+
+                        <span class="stat-trend">
+                            All
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="totalIncidents"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Total Incidents
+                    </div>
+
+                    <div class="stat-description">
+                        Incidents available to your account
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card pending-card"
+                    data-stat="pending"
+                >
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon amber">
+                            ◷
+                        </div>
+
+                        <span class="stat-trend warning">
+                            Needs review
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="pendingIncidents"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div class="stat-description">
+                        Awaiting review
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card investigating-card"
+                    data-stat="investigating"
+                >
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+                            ◌
+                        </div>
+
+                        <span class="stat-trend">
+                            In progress
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="investigatingIncidents"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Investigating
+                    </div>
+
+                    <div class="stat-description">
+                        Currently under investigation
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card resolved-card"
+                    data-stat="resolved"
+                >
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+                            ✓
+                        </div>
+
+                        <span class="stat-trend success">
+                            Complete
+                        </span>
+
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="resolvedIncidents"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Resolved
+                    </div>
+
+                    <div class="stat-description">
+                        Closed after investigation
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-grid" id="analytics">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-kicker">WORKFLOW</span>
+                            <h2>Incidents by Status</h2>
+                        </div>
+                    </div>
+                    <div class="activity-chart status-activity-chart" id="dashboardAnalyticsStatus" aria-label="Incident counts by status">
+                        <div class="chart-y-axis" aria-hidden="true">
+                            <span>100%</span>
+                            <span>75%</span>
+                            <span>50%</span>
+                            <span>25%</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="chart-area">
+                            <div class="chart-lines" aria-hidden="true">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="chart-bars" id="dashboardStatusBars">
+                                <div class="loading-cell"><div class="loading-spinner"></div>Loading status data...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel severity-panel">
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-kicker">RISK LEVEL</span>
+                            <h2>Severity Breakdown</h2>
+                        </div>
+                    </div>
+                    <div class="severity-list" id="dashboardAnalyticsSeverity">
+                        <div class="loading-cell"><div class="loading-spinner"></div>Loading severity data...</div>
+                    </div>
+                </div>
+
+                <div class="panel analytics-types-panel">
+                    <div class="panel-header">
+                        <div>
+                            <span class="panel-kicker">CATEGORIES</span>
+                            <h2>Incidents by Type</h2>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="incidents-table">
+                            <thead><tr><th>TYPE</th><th>COUNT</th></tr></thead>
+                            <tbody id="dashboardAnalyticsTypes"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section-header">
+                <div>
+                    <span class="panel-kicker">INCIDENTS</span>
+                    <h2>Incident Management</h2>
+                    <p class="section-description">Search, review, and manage reported incidents from the incidents page.</p>
+                </div>
+                <a class="secondary-btn" href="incidents.html">Open Incidents <span>→</span></a>
+            </div>
+
+
+            <!-- SETTINGS PLACEHOLDER -->
+
+            <section
+                class="bottom-info"
+                id="about"
+            >
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🛡
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            SecureTrack Security Center
+                        </strong>
+
+                        <p>
+                            SecureTrack helps you report security incidents, track investigations, and keep response details organized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

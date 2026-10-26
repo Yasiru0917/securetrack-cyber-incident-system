@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrator Setup | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="brand-icon">🛡</div>
+        <div>
+          <h1>SecureTrack</h1>
+          <span>Initial administrator setup</span>
+        </div>
+      </div>
+
+      <div class="auth-header">
+        <p class="eyebrow">Administrator setup</p>
+        <h2>Create the first admin account</h2>
+        <p class="form-description">Use the setup key configured in the backend to create the first administrator.</p>
+      </div>
+
+      <form id="bootstrapForm" novalidate>
+        <div class="field-group">
+          <label for="name">Full name</label>
+          <input id="name" type="text" maxlength="100" placeholder="Operations Lead" required />
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email address</label>
+          <input id="email" type="email" maxlength="254" placeholder="admin@company.com" required />
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input id="password" type="password" maxlength="128" placeholder="At least 8 characters" required />
+            <button type="button" class="toggle-password" data-toggle-password="register" data-target-id="password">Show</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="bootstrapKey">Administrator setup key</label>
+          <input id="bootstrapKey" type="password" placeholder="Enter the configured setup key" required />
+        </div>
+
+        <button type="submit" class="primary-btn">Create administrator account</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('bootstrapForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value,
+        bootstrapKey: document.getElementById('bootstrapKey').value
+      };
+
+      try {
+        const response = await fetch('http://localhost:5000/create-admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Admin bootstrap failed');
+        window.location.href = 'login.html';
+      } catch (error) {
+        alert(error.message || 'Unable to create the admin account');
+      }
+    });
+  </script>
+</body>
+</html>

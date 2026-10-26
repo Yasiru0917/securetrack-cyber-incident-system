@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report an Incident | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="report-page-body">
+  <main class="report-page-shell">
+    <header class="report-topbar">
+      <a class="report-brand" href="dashboard.html" aria-label="SecureTrack dashboard">
+        <span class="report-brand-icon" aria-hidden="true">🛡</span>
+        <span>
+          <strong>SecureTrack</strong>
+          <small>Security Operations</small>
+        </span>
+      </a>
+      <a class="report-back-link" href="dashboard.html">
+        <span aria-hidden="true">←</span>
+        Back to dashboard
+      </a>
+    </header>
+
+    <div class="report-layout">
+      <section class="report-intro" aria-labelledby="reportIntroHeading">
+        <span class="report-kicker"><span></span> INCIDENT RESPONSE</span>
+        <h1 id="reportIntroHeading">Help us respond<br />to security concerns.</h1>
+        <p class="report-intro-copy">
+          Share what happened. Your report will be recorded so it can be reviewed, investigated, and tracked.
+        </p>
+
+        <div class="report-guidance">
+          <div class="report-guidance-icon" aria-hidden="true">i</div>
+          <div>
+            <strong>What should I include?</strong>
+            <p>Describe what you noticed, when it happened, and any affected accounts, devices, or systems.</p>
+          </div>
+        </div>
+
+        <div class="report-trust-note">
+          <span aria-hidden="true">✓</span>
+          <p>Your report is securely associated with your account.</p>
+        </div>
+      </section>
+
+      <section class="report-card" aria-labelledby="reportFormHeading">
+        <div class="report-card-header">
+          <div class="report-form-icon" aria-hidden="true">＋</div>
+          <div>
+            <span class="report-card-kicker">NEW REPORT</span>
+            <h2 id="reportFormHeading">Incident details</h2>
+            <p>Complete the fields below to submit your report.</p>
+          </div>
+        </div>
+
+        <form id="reportForm" novalidate>
+          <div class="report-field-grid">
+            <div class="field-group">
+              <label for="type">Incident type <span>*</span></label>
+              <select id="type" required>
+                <option value="">Choose a type</option>
+                <option value="phishing">Phishing Attack</option>
+                <option value="malware">Malware Infection</option>
+                <option value="unauthorized">Unauthorized Access</option>
+                <option value="data_breach">Data Breach</option>
+                <option value="suspicious">Suspicious Activity</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="severity">Severity <span>*</span></label>
+              <select id="severity" required>
+                <option value="">Choose a level</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group report-description-field">
+            <label for="description">What happened? <span>*</span></label>
+            <span class="report-field-hint">Include useful details, but do not include passwords or other secrets.</span>
+            <textarea
+              id="description"
+              rows="7"
+              maxlength="5000"
+              placeholder="Describe what you observed, when it occurred, and which systems or accounts may be affected..."
+              required
+            ></textarea>
+            <span class="report-character-limit">Up to 5,000 characters</span>
+          </div>
+
+          <div class="report-form-footer">
+            <p><span aria-hidden="true">•</span> Fields marked with * are required</p>
+            <div class="report-actions">
+              <a class="report-cancel-btn" href="dashboard.html">Cancel</a>
+              <button id="submitIncidentButton" type="submit" class="primary-btn">
+                Submit report <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

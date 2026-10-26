@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | SecureTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="brand-icon">🛡</div>
+        <div>
+          <h1>SecureTrack</h1>
+          <span>Security incident reporting and tracking</span>
+        </div>
+      </div>
+
+      <div class="auth-header">
+        <p class="eyebrow">Welcome back</p>
+        <h2>Sign in to SecureTrack</h2>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="field-group">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="name@company.com" required />
+        </div>
+
+        <div class="field-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+            <button type="button" class="toggle-password" data-toggle-password="login" data-target-id="password">Show</button>
+          </div>
+        </div>
+
+        <button id="loginButton" class="primary-btn auth-submit" type="submit" data-auth-submit="login">Sign in</button>
+      </form>
+
+      <p class="auth-switch">
+        New to SecureTrack?
+        <a href="register.html">Create an account</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
